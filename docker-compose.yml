@@ -1,0 +1,37 @@
+version: '3.7'
+# https://github.com/docker-library/postgres/issues/435
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:15.2
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./_infrastructure/postgre/init/:/docker-entrypoint-initdb.d/
+    ports:
+      - 25432:5432
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0
+    environment:
+      KC_HOSTNAME: localhost
+      KC_DB_URL: jdbc:postgresql://postgres/keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KEYCLOAK_IMPORT: '/opt/keycloak/data/import/realm-heritage.json'
+      KC_DB: postgres
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: password
+      KC_LOG_LEVEL: info
+    volumes:
+      - ./_infrastructure/keycloak/realm-heritage.json:/opt/keycloak/data/import/realm-heritage.json
+    command:
+      - start-dev --import-realm
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
