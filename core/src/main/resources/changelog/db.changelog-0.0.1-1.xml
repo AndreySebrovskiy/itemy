@@ -10,8 +10,8 @@
             create table if not exists public.item (
                                          id numeric primary key not null,
                                          name text not null,
-                                         price numeric(19, 2) not null,
-                                         currency text not null
+                                         description text,
+                                         year date
             );
         </sql>
         <rollback>
@@ -28,12 +28,12 @@
         </rollback>
     </changeSet>
 
-    <changeSet author="andrei.siabrouski" id="1_add-index-on-item-price">
+    <changeSet author="andrei.siabrouski" id="1_add-index-on-item-year">
         <sql>
-            create index item_price_idx on item (price);
+            create index item_year_idx on item (year);
         </sql>
         <rollback>
-            <dropIndex tableName="item" indexName="item_price_idx"/>
+            <dropIndex tableName="item" indexName="item_year_idx"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

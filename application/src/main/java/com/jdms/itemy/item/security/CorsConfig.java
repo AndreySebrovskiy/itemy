@@ -1,4 +1,4 @@
-package com.jdms.itemy.security;
+package com.jdms.itemy.item.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

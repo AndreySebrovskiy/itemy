@@ -1,4 +1,4 @@
-package com.jdms.itemy.security;
+package com.jdms.itemy.item.security;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;

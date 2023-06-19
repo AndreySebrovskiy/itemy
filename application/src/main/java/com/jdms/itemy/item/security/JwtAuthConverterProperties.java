@@ -1,4 +1,4 @@
-package com.jdms.itemy.security;
+package com.jdms.itemy.item.security;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,9 +1,8 @@
-package com.jdms.itemy.security;
+package com.jdms.itemy.item.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,11 +17,8 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        //http.authorizeHttpRequests()
-               /* .requestMatchers(HttpMethod.GET, CityController.CITIES_PAGEABLE_URI).authenticated()
-                .requestMatchers(HttpMethod.PATCH, CityController.CITY_UPDATE_URI).hasRole("ROLE_ALLOW_EDIT")
-                .requestMatchers(HttpMethod.GET, CityController.CITIES_URI).permitAll()
-                .anyRequest().authenticated();*/
+        http.authorizeHttpRequests()
+                .anyRequest().authenticated();
         http.oauth2ResourceServer()
                 .jwt()
                 .jwtAuthenticationConverter(jwtAuthConverter);
