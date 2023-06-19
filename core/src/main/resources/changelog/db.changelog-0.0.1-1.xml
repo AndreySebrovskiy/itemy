@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="andrei.siabrouski" id="0_init-item-table">
+        <sql>
+            create table if not exists public.item (
+                                         id numeric primary key not null,
+                                         name text not null,
+                                         price numeric(19, 2) not null,
+                                         currency text not null
+            );
+        </sql>
+        <rollback>
+            <dropTable tableName="item"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="andrei.siabrouski" id="1_add-index-on-item-name">
+        <sql>
+            create index item_name_idx on item (name);
+        </sql>
+        <rollback>
+            <dropIndex tableName="item" indexName="item_name_idx"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="andrei.siabrouski" id="1_add-index-on-item-price">
+        <sql>
+            create index item_price_idx on item (price);
+        </sql>
+        <rollback>
+            <dropIndex tableName="item" indexName="item_price_idx"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

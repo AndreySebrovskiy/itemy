@@ -17,4 +17,5 @@ exec_sql() {
     psql --username "$POSTGRES_USER" --dbname "$1" -c "$2"
 }
 
+create_db_user_pass heritage       admin1             pass1
 create_db_user_pass keycloak       keycloak           password
