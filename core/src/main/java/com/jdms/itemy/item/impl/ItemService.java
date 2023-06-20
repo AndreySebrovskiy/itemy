@@ -4,9 +4,12 @@ import com.jdms.itemy.item.Item;
 import com.jdms.itemy.item.exception.ItemNotFoundException;
 import com.jdms.itemy.item.model.BulkCreateItems;
 import com.jdms.itemy.item.model.CreateItem;
-import com.jdms.itemy.item.model.ItemMapper;
+import com.jdms.itemy.item.model.ItemCoreMapper;
 import com.jdms.itemy.item.model.UpdateItem;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -23,7 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository repository;
-    private final ItemMapper itemMapper;
+    private final ItemCoreMapper itemMapper;
 
     /**
      * Item by id, name and year
@@ -34,6 +37,7 @@ public class ItemService {
 
      * @return Item
      */
+    @Cacheable("items")
     public Item fetchByIdNameAndYear(Long id, String name, LocalDate year) {
         return repository.findByIdNameYear(id, name, year);
     }
@@ -76,9 +80,10 @@ public class ItemService {
      * @param id          Item ID required to be updated
      * @return an updated Item
      */
+    @CachePut(value = "items", key = "#updateItem.name")
     @Transactional
     public Item update(Long id, UpdateItem updateItem) {
-        repository.update(updateItem.getName(), updateItem.getDescription(), id);
+        repository.update(updateItem.getName(), updateItem.getDescription(), updateItem.getYear(), id);
         return repository.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
     }
 
@@ -87,6 +92,7 @@ public class ItemService {
      * @param id Item Id
      * @return Item
      */
+    @Cacheable("items")
     public Item findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
     }
@@ -95,6 +101,8 @@ public class ItemService {
      * Delete item by Id
      * @param id Item by Id
      */
+    @CacheEvict("items")
+    @Transactional
     public void deleteItem(Long id) {
         repository.deleteById(id);
     }

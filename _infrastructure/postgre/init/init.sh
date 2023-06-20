@@ -17,5 +17,5 @@ exec_sql() {
     psql --username "$POSTGRES_USER" --dbname "$1" -c "$2"
 }
 
-create_db_user_pass items       admin1             pass1
+create_db_user_pass itemy          admin1             pass1
 create_db_user_pass keycloak       keycloak           password

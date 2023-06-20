@@ -19,7 +19,7 @@ import static com.jdms.itemy.item.ItemRestController.ITEMS_URI;
         @Tag(name = "Items", description = "REST API for items operations")
 })
 @RestController
-@RequestMapping(value = ITEMS_URI, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = ITEMS_URI, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 @Slf4j
 public class ItemRestController {
@@ -34,11 +34,16 @@ public class ItemRestController {
         return itemMapper.map(service.create(request));
     }
 
-    @GetMapping("/item/{id}")
-    public ItemResponse getItems(@PathVariable Long id,
+    @GetMapping("/item")
+    public ItemResponse getItemWinName(@RequestParam(value = "name")Long id,
                                  @RequestParam(value = "name") String name,
                                  @RequestParam(value = "year") LocalDate year) {
         return itemMapper.map(service.fetchByIdNameAndYear(id, name, year));
+    }
+
+    @GetMapping("/item/{id}")
+    public ItemResponse getItem(@PathVariable Long id) {
+        return itemMapper.map(service.findById(id));
     }
 
     @PutMapping("/{id}")
@@ -59,7 +64,7 @@ public class ItemRestController {
         return itemMapper.mapToResponse(service.getItemsPage(page, size));
     }
 
-    @PostMapping("/bulk")
+    @PostMapping("/bulk-insert")
     @ResponseStatus(HttpStatus.CREATED)
     public void createItems(@RequestBody BulkCreateItems items) {
         service.createItems(items);
