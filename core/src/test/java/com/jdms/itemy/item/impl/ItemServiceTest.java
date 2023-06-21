@@ -38,14 +38,14 @@ public class ItemServiceTest {
         Item item = getDefaultItem(0);
         given(repository.findById(any())).willReturn(Optional.of(item));
 
-        Item actual = service.update(Long.valueOf(0), UpdateItem.builder().name("new").description("new").build());
+        Item actual = service.update(0L, UpdateItem.builder().name("new").description("new").build());
         assertThat(actual).isEqualTo(item);
     }
 
     @Test
     public void test() {
         given(repository.findByIdNameYear(any(), any(), any())).willReturn(getDefaultItem(1));
-        Item actual = service.fetchByIdNameAndYear(Long.valueOf(1), "name-1",  LocalDate.of(2023,6,6));
+        Item actual = service.fetchByIdNameAndYear(1L, "name-1",  LocalDate.of(2023,6,6));
         assertThat(actual).isEqualTo(getDefaultItem(1));
     }
 

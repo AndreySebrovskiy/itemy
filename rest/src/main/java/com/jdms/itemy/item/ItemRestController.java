@@ -19,7 +19,7 @@ import static com.jdms.itemy.item.ItemRestController.ITEMS_URI;
         @Tag(name = "Items", description = "REST API for items operations")
 })
 @RestController
-@RequestMapping(value = ITEMS_URI, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = ITEMS_URI, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 @Slf4j
 public class ItemRestController {

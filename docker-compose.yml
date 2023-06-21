@@ -1,11 +1,12 @@
-version: '3'
+version: '3.7'
 
 volumes:
   postgres_data:
-    driver: local
 
 services:
-  postgres:
+
+  itemy.postgres:
+    container_name: itemy.postgres
     image: postgres:15.2
     environment:
       - POSTGRES_PASSWORD=password
@@ -14,12 +15,15 @@ services:
       - ./_infrastructure/postgre/init/:/docker-entrypoint-initdb.d/
     ports:
       - 25432:5432
+    networks:
+      - itemy
 
-  keycloak:
+  itemy.keycloak:
+    container_name: itemy.keycloak
     image: quay.io/keycloak/keycloak:20.0
     environment:
       KC_HOSTNAME: localhost
-      KC_DB_URL: jdbc:postgresql://postgres/keycloak
+      KC_DB_URL: jdbc:postgresql://itemy.postgres/keycloak
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
 #      KEYCLOAK_IMPORT: '/opt/keycloak/data/import/realm-export.json'
@@ -34,7 +38,27 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - postgres
+      - itemy.postgres
+    networks:
+      - itemy
+
+
+  itemy-application:
+    container_name: itemy-application
+    build:
+      dockerfile: Dockerfile
+    image: application:latest
+    ports:
+      - 8083:8083
+    depends_on:
+      - itemy.postgres
+      - itemy.keycloak
+    networks:
+      - itemy
+
+networks:
+  itemy:
+    name: itemy
 #
 #  zookeeper:
 #    image: confluentinc/cp-zookeeper:latest
