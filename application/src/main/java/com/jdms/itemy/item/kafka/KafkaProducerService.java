@@ -14,7 +14,7 @@ public class KafkaProducerService {
     public void send(String topicName, String key, LogBody value) {
 
         var future = kafkaTemplate.send(topicName, key, value);
-        log.info("Kafka message sent {}", value);
+        log.info("Kafka message sent");
         future.whenComplete((sendResult, exception) -> {
             if (exception != null) {
                 future.completeExceptionally(exception);
