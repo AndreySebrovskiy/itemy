@@ -7,7 +7,7 @@
 - JDK 17
 - Spring Boot 3
 - `docker-compose`
-- OAuth2 with 
+- OAuth2 with keycloak
 - IDE of your choice
 - postman collection
 
