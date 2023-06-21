@@ -14,6 +14,5 @@ public class CreateItem {
     private String name;
     @NotBlank
     private String description;
-    @NotNull
-    private LocalDate yearManufactured;
+    private LocalDate year;
 }

@@ -12,7 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class LogBody implements Serializable {
-    private String trace;
     private String request;
     private String response;
 }

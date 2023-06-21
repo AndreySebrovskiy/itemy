@@ -24,7 +24,7 @@ public class Item {
     private String description;
 
     @Column(name = "year")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private LocalDate year;
 
     public Item(String name, String description, LocalDate year) {

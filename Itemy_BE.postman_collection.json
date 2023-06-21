@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "0c900417-d13b-461e-b178-5f8e891c4786",
+		"name": "Itemy_BE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ItemsPageable",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8080/realms/realmItem/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "itemy-backend",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "6WXVHu6HtSEqEQZtjNx9mwGMgEuO6Dmr",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8083/backend/api/items/pageable?page=0&size=20",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"backend",
+						"api",
+						"items",
+						"pageable"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "itemUpdate",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8080/realms/realmItem/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "itemy-backend",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "6WXVHu6HtSEqEQZtjNx9mwGMgEuO6Dmr",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"ItemName updates\",\n    \"description\": \"dummy thing\",\n    \"year\": \"2023-06-06\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8083/backend/api/items/352",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"backend",
+						"api",
+						"items",
+						"352"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ItemCreate",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8080/realms/realmItem/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "itemy-backend",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "6WXVHu6HtSEqEQZtjNx9mwGMgEuO6Dmr",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"ItemName\",\r\n    \"description\": \"dummy thing\",\r\n    \"year\": \"2023-06-06\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8083/backend/api/items",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"backend",
+						"api",
+						"items"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

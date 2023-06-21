@@ -35,7 +35,7 @@ public class ItemRestController {
     }
 
     @GetMapping("/item")
-    public ItemResponse getItemWinName(@RequestParam(value = "name")Long id,
+    public ItemResponse getItemWinName(@RequestParam(value = "id") Long id,
                                  @RequestParam(value = "name") String name,
                                  @RequestParam(value = "year") LocalDate year) {
         return itemMapper.map(service.fetchByIdNameAndYear(id, name, year));
