@@ -6,7 +6,7 @@
 - apache-maven-3.8.6 or higher (or use `mvnw` provided in repo)
 - JDK 17
 - Spring Boot 3
-- `docker-compose`
+- docker-compose
 - OAuth2 with keycloak
 - IDE of your choice
 - postman collection
@@ -19,10 +19,11 @@ Execute:
 `mvn clean package`
 
 
-## Run
-Run all needed services via `docker-compose up --build`
 
-## Alternatively: comment itemy-application in  docker-compose 
+
+## RUN
+
+* run `docker build -t application .`
 
 * Run all needed services via `docker-compose up -d`
 
@@ -30,15 +31,19 @@ Run all needed services via `docker-compose up --build`
 
 * Build backend `mvn clean package`
 
-* Run backend (class `GradBackendApplication`) with `dev`  profile
+* Run backend (class `ItemyApplication`) with `dev`  profile
+
+## Alternatively Run : Comment out app image. haven't managed security configs for keycloak in docker image
+Run all needed services via `docker-compose up --build` Security issues;
+
 
 [[app-ports]]
 == Application ports
 . BE is on `8083`
 . Keycloak is on `8080`
-
 "BE client id": `itemy-backend`
 "client-secret": `6WXVHu6HtSEqEQZtjNx9mwGMgEuO6Dmr`
+
 
 In this solution there is lack of tests and Rest endpoints with functionality. Tried to make
 it simple.

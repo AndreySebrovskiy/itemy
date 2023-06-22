@@ -50,7 +50,7 @@ services:
     ports:
       - "22181:2181"
 
-  kafka:
+  broker:
     image: confluentinc/cp-kafka:latest
     container_name: broker
     ports:
@@ -62,27 +62,26 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-    networks:
-      - itemy
 
-  itemy.application:
-    container_name: itemy.application
-#    build:
-#      context: itemy.application
-#      dockerfile: Dockerfile
-    image: application:latest
-    ports:
-      - 8083:8083
-    depends_on:
-      - itemy.postgres
-      - itemy.keycloak
-      - kafka
-    networks:
-      - itemy
+
+#  itemy.application:
+#    container_name: itemy.application
+##    build:
+##      context: itemy.application
+##      dockerfile: Dockerfile
+#    image: application:latest
+#    ports:
+#      - 8083:8083
+#    depends_on:
+#      - itemy.postgres
+#      - itemy.keycloak
+#      - broker
+#    networks:
+#      - itemy
 
 networks:
   itemy:

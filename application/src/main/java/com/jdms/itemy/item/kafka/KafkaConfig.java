@@ -10,7 +10,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic taskTopic() {
-        return TopicBuilder.name("log-topic")
+        return TopicBuilder.name("log-topic-1")
                 .partitions(1)
                 .replicas(1)
                 .build();

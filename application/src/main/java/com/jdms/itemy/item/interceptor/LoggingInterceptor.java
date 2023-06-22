@@ -21,6 +21,6 @@ public class LoggingInterceptor implements HandlerInterceptor {
         var body = LogBody.builder()
                 .request(ToStringBuilder.reflectionToString(request))
                 .response(ToStringBuilder.reflectionToString(response)).build();
-        kafkaProducerService.send("log-topic", handler.toString(), body);
+        kafkaProducerService.send("log-topic-1", handler.toString(), body);
     }
 }
