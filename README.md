@@ -16,12 +16,10 @@
 
 Execute:
 
-`mvn clean package`
+## RUN  `docker-compose up -d`  and use postman collection to check out REST API
 
 
-
-
-## RUN
+## Alternatively RUN
 
 * run `docker build -t application .`
 
@@ -29,13 +27,13 @@ Execute:
 
 * Verify all started `docker-compose logs -f`
 
+
+## Alternatively Run : Comment out app image.
+Run all needed services via `docker-compose up -d`
+
 * Build backend `mvn clean package`
 
 * Run backend (class `ItemyApplication`) with `dev`  profile
-
-## Alternatively Run : Comment out app image. haven't managed security configs for keycloak in docker image
-Run all needed services via `docker-compose up --build` Security issues;
-
 
 [[app-ports]]
 == Application ports
